@@ -1,0 +1,12 @@
+In this stage we use a database containing most common passwords. 
+The database contains passwords in lowercase, however, we take into consideration all sorts of casings. 
+For e.g: a password of 6 chars will generate 64 different cases (considering all chars and no numbers)
+again, here we assume the password may contain combination of only small latin characters (a-z) and any digit (0-9). 
+
+The algorithm is the following:
+
+1. Read a password from the database of most common passwords
+2. Using itertools.product() to generate the given password in all sorts of mixed cases
+3. On generating each password string, send the password to the server using socket.
+4. If generated password is not the user password, we continue generating next case / passward until we guess the password correctly.
+5. On getting success message from the server, we print the guessed password and terminate
