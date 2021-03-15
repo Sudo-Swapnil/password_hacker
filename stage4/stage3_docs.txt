@@ -1,0 +1,27 @@
+Along with password, this time we try to hack the login id.
+
+For login id, we use a list of most frequently used admin usernames. 
+
+The database contains usernames in lowercase, however, we take into consideration all sorts of casings. 
+For e.g: a username of 6 chars will generate 64 different cases (considering all chars and no numbers)
+again, here we assume the username may contain combination of only small latin characters (a-z) and any digit (0-9). 
+
+To hack the password, we use one of the system vulnerability.
+
+We get: 
+{
+    "result": "Exception happened during login"
+}
+
+response from the server, when a character matches the password. Using this, we build the whole password, character by character until we get the response:
+{
+    "result": "Connection success!"
+}
+
+The algorithm is the following:
+
+1. Try all logins with an empty password.
+2. When you find the login, try out every possible password of length 1.
+3. When an exception occurs, you know that you found the first letter of the password.
+4. Use the found login and the found letter to find the second letter of the password.
+5. Repeat until you receive the ‘success’ message.
